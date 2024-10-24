@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/spettacolo/chat/chat"
+	"github.com/spettacolo/chat/main/chat"
 )
 
 func main() {
