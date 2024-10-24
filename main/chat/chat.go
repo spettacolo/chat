@@ -174,3 +174,13 @@ func max(a, b int) int {
 	}
 	return b
 }
+
+func main() {
+	chat, err := NewChat()
+	if err != nil {
+		fmt.Printf("Errore nell'inizializzazione della chat: %v\n", err)
+		return
+	}
+
+	chat.Run()
+}
