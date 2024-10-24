@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/spettacolo/chat/main/message"
+	"message"
 
 	"github.com/gdamore/tcell/v2"
 )
