@@ -1,20 +1,26 @@
-package chat
+package main
 
 import (
 	"fmt"
 	"time"
-
-	"./message"
 
 	"github.com/gdamore/tcell/v2"
 )
 
 type Chat struct {
 	screen      tcell.Screen
-	messages    []message.Message
+	messages    []Message
 	inputBuffer string
 	scrollPos   int
 	style       tcell.Style
+}
+
+type Message struct {
+	Sender      string    `json:"sender"`  // Username dell'utente che invia il messaggio
+	RoomID      string    `json:"room_id"` // ID della stanza (privata, gruppo o canale)
+	Content     string    `json:"content"` // Contenuto del messaggio
+	MessageType string    `json:"type"`    // Tipo di messaggio ("private", "group", "channel")
+	Time        time.Time `json:"time"`    // Ora di invio del messaggio
 }
 
 func NewChat() (*Chat, error) {
@@ -29,7 +35,7 @@ func NewChat() (*Chat, error) {
 	style := tcell.StyleDefault.Background(tcell.ColorBlack).Foreground(tcell.ColorWhite)
 	return &Chat{
 		screen:      screen,
-		messages:    make([]message.Message, 0),
+		messages:    make([]Message, 0),
 		inputBuffer: "",
 		scrollPos:   0,
 		style:       style,
@@ -137,7 +143,7 @@ func (c *Chat) draw() { // Fixed receiver syntax
 }
 
 func (c *Chat) addMessage(content string) { // Fixed receiver syntax
-	c.messages = append(c.messages, message.Message{
+	c.messages = append(c.messages, Message{
 		Sender:      "exampleUser",
 		RoomID:      "exampleRoom",
 		Content:     content,
